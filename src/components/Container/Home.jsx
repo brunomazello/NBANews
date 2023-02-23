@@ -21,19 +21,34 @@ export const List = styled.li`
   border-radius: 8px;
 `;
 
-export const Input = styled.input`
-  padding: 10px;
+export const Input = styled.input.attrs((props) => ({
+  "data-index": props.index,
+}))`
+  padding: 10px 5px;
   border-radius: 5px;
   border: 1px solid gray;
   outline: none;
-  width: 300px;
+  width: 250px;
+
+  ::placeholder {
+    text-align: center;
+  }
 `;
 
-export const Container = styled.ul`
+export const ContainerUl = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+`;
+
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 35px;
+  margin-left: 35px;
 `;
 
 export const Paragraph = styled.p.attrs((props) => ({
