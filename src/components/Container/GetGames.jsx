@@ -1,16 +1,19 @@
 import styled from "styled-components";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Container, Lista } from "./Home";
+import { Container, List, Paragraph, Title } from "./Home";
+import format from "date-fns/format";
+import { YearSelector } from "./YearSelector";
 
 function GetGames() {
   const [gamelist, setGameList] = useState([]);
-  const [gameScoreList, setGameScoreList] = useState([]);
+  const [selectedYear, setSelectedYear] = useState("2022");
 
   useEffect(() => {
+    const url = `https://www.balldontlie.io/api/v1/games?seasons[]=${selectedYear}&page=50`;
     const options = {
       method: "GET",
-      url: "https://www.balldontlie.io/api/v1/games",
+      url: url,
     };
 
     axios
@@ -19,30 +22,35 @@ function GetGames() {
         const data = response.data;
         const gameData = data.data.map((teams) => ({
           homeTeam: teams.home_team.full_name,
-          score: teams.home_team_score,
+          homeTeamScore: teams.home_team_score,
+          awayTeamScore: teams.visitor_team_score,
           awayTeam: teams.visitor_team.full_name,
-          date: teams.date,
+          date: format(new Date(teams.date), "dd/MM/yyyy 'às' HH'h':mm'"),
         }));
         setGameList(gameData);
       })
       .catch(function (error) {
         console.error(error);
       });
-  }, []);
+  }, [selectedYear]);
+
   return (
     <div>
-      <h1>Lista de Jogos:</h1>
-      <ul>
+      <Title size={1}>Lista de Jogos</Title>
+      <YearSelector year={selectedYear} setYear={setSelectedYear} />
+      <Container>
         {gamelist.map((game, index) => (
-          <Lista key={index}>
-            <p>Date: {game.date}</p>
-            <p>
-              Game:{game.homeTeam} x {game.awayTeam}
-            </p>
-            <p>Scorer: {game.score}</p>
-          </Lista>
+          <List key={index}>
+            <Title size={2}>
+              {game.homeTeam} x {game.awayTeam}
+            </Title>
+            <Paragraph>Data: {game.date}</Paragraph>
+            <Paragraph>
+              Placar final: {game.homeTeamScore} x {game.awayTeamScore}{" "}
+            </Paragraph>
+          </List>
         ))}
-      </ul>
+      </Container>
     </div>
   );
 }
