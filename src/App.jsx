@@ -1,12 +1,13 @@
 import { useState } from "react";
 import "./App.css";
-import styled from "styled-components";
+import GetTeams from "./components/Container/GetTeams";
 
 function App() {
   return (
-    <div>
-      <h1>Meu Piru é grandãooo</h1>
-    </div>
+    <>
+      <h1>A</h1>
+      <GetTeams />
+    </>
   );
 }
 
