@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Container, List, Paragraph, Title } from "./Home";
+import { Container, List, ScorePoints, Title } from "./Home";
 import format from "date-fns/format";
 import { YearSelector } from "./YearSelector";
 
@@ -25,7 +25,7 @@ function GetGames() {
           homeTeamScore: teams.home_team_score,
           awayTeamScore: teams.visitor_team_score,
           awayTeam: teams.visitor_team.full_name,
-          date: format(new Date(teams.date), "dd/MM/yyyy 'às' HH'h':mm'"),
+          date: format(new Date(teams.date), "dd/MM/yyyy"),
         }));
         setGameList(gameData);
       })
@@ -44,10 +44,10 @@ function GetGames() {
             <Title size={2}>
               {game.homeTeam} x {game.awayTeam}
             </Title>
-            <Paragraph>Data: {game.date}</Paragraph>
-            <Paragraph>
-              Placar final: {game.homeTeamScore} x {game.awayTeamScore}{" "}
-            </Paragraph>
+            <Title size={4}>Data: {game.date}</Title>
+            <ScorePoints>
+              {game.homeTeamScore} x {game.awayTeamScore}{" "}
+            </ScorePoints>
           </List>
         ))}
       </Container>

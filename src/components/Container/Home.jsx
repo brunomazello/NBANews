@@ -14,11 +14,12 @@ export const List = styled.li`
   background-color: rgba(255, 255, 255, 0.06);
   -webkit-backdrop-filter: blur(15px);
   backdrop-filter: blur(15px);
-  padding: 5px 25px;
   -webkit-box-shadow: 0 25px 23px rgba(0, 0, 0, 0.15);
   box-shadow: 0 25px 23px rgba(0, 0, 0, 0.15);
   border: 1.5px solid rgba(255, 255, 255, 0.06);
   border-radius: 8px;
+  padding: 5px 25px;
+
 `;
 
 export const Input = styled.input.attrs((props) => ({
@@ -56,11 +57,19 @@ export const Paragraph = styled.p.attrs((props) => ({
 }))`
   /* estilos para todos os elementos <p> */
   color: #fff;
+
   /* estilos apenas para o segundo elemento <p> */
   &[data-index="1"] {
     color: red;
     font-weight: bold;
   }
+`;
+
+export const ScorePoints = styled.p`
+  color: orange;
+  text-align: center;
+  font-family: "Nabla", cursive;
+  font-size: 50px;
 `;
 
 export const Title = styled.h1.attrs((props) => ({
@@ -71,12 +80,19 @@ export const Title = styled.h1.attrs((props) => ({
   text-align: center;
   font-weight: bold;
   text-transform: uppercase;
+
   /* estilos apenas para o segundo elemento <h1> */
   &[data-titlesize="1"] {
-    font-size: 35px;
+    font-size: 60px;
+    font-family: "Nabla", cursive;
   }
   &[data-titlesize="2"] {
     font-size: 20px;
+  }
+  &[data-titlesize="4"] {
+    font-size: 12px;
+    font-weight: bold;
+    color: orange;
   }
 `;
 
